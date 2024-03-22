@@ -1,5 +1,9 @@
 # ps-random-wait
 
+Randomly selects and suspends child thread(processes) of the specified process.
+
+This is intended to be used in testing to find timing bugs.
+
 ## how to test
 ``` bash
 # terminal A
