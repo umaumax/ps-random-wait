@@ -24,14 +24,17 @@ RANDOM_WAIT_MSEC_MAX=${RANDOM_WAIT_MSEC_MAX:-3000}
 echo "[log] target pid: $TARGET_PID"
 function get_pids() {
   if [[ $(uname) == "Darwin" ]]; then
+    # mac
     # with target_pid
     pids=($(pstree -p "$TARGET_PID" "$TARGET_PID" | sed -E 's/^([^0-9]+)([0-9]+).*/\2/'))
   else
     # ubuntu
+    # with target_pid
     pids=($(pstree -p "$TARGET_PID" | grep -E -o '\([0-9]+\)' | grep -E -o '[0-9]+'))
   fi
 
   if [[ ! -v WITH_TARGET_PID ]]; then
+    # without target_pid
     # remove first element
     pids=(${pids[@]:1})
   fi
